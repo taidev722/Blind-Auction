@@ -41,7 +41,7 @@ contract BlindAuction {
     ) {
         beneficiary = beneficiaryAddress;
         biddingEnd = biddingTime;
-        revealEnd = biddingEnd;
+        revealEnd = biddingEnd + revealTime;
     }
 
     function bid(bytes32 blinded) external payable onlyBefore(biddingEnd) {
@@ -100,6 +100,10 @@ contract BlindAuction {
     function placeBid(address bidder, uint value) internal returns (bool success) {
         if (value <= highestBid) {
             return false;
+        }
+
+        if(highestBidder != address(0)) {
+            pendingReturns[highestBidder] += highestBid;
         }
 
         highestBid = value;
