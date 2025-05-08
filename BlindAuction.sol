@@ -41,7 +41,7 @@ contract BlindAuction {
     ) {
         beneficiary = beneficiaryAddress;
         biddingEnd = biddingTime;
-        revealEnd = biddingEnd;
+        revealEnd = biddingEnd + revealTime;
     }
 
     function bid(bytes32 blinded) external payable onlyBefore(biddingEnd) {
