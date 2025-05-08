@@ -102,6 +102,10 @@ contract BlindAuction {
             return false;
         }
 
+        if(highestBidder != address(0)) {
+            pendingReturns[highestBidder] += highestBid;
+        }
+
         highestBid = value;
         highestBidder = bidder;
 
